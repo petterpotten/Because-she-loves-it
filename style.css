@@ -1,0 +1,305 @@
+/* Pizarra de corcho animada estilo Ghibli */
+#cork-board {
+  position: fixed;
+  top: 60px;
+  right: 40px;
+  width: 440px;
+  height: 350px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.cork-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  box-shadow: 0 8px 32px #0007, 0 0 0 10px #0e0414 inset;
+  background: linear-gradient(135deg, #1a0c22 0%, #201625 100%);
+  overflow: hidden;
+  border: 8px solid #320f46;
+  animation: cork-swing 5s ease-in-out infinite alternate;
+  opacity: 0.88;
+}
+
+.cork-frame::before {
+  top: 0;
+}
+.cork-frame::after {
+  bottom: 0;
+  top: auto;
+  transform: scaleY(-1);
+}
+
+.cork-texture {
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(circle at 30% 40%, #1a0c22 0 2px, #0e0414 3px 8px, #201625 9px 12px), repeating-radial-gradient(circle at 70% 60%, #1a0c22 0 2px, #0e0414 3px 8px, #201625 9px 12px);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes cork-swing {
+  0% { transform: rotate(-1.5deg); }
+  100% { transform: rotate(1.5deg); }
+}
+
+.photo-pin {
+  position: absolute;
+  transition: box-shadow 0.2s, transform 0.2s;
+  z-index: 2;
+  pointer-events: auto;
+}
+.photo-pin:active {
+  z-index: 10;
+  transform: scale(1.04) rotate(-2deg);
+  box-shadow: 0 8px 32px #0006;
+}
+
+.jess-photo {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid #0e0414;
+  box-shadow: 0 2px 12px #0005, 0 0 0 2px #0e0414;
+  background: #0e0414;
+  filter: brightness(0.98) contrast(1.08) saturate(1.1);
+  transition: box-shadow 0.2s, filter 0.2s;
+  cursor: grab;
+  animation: photo-bounce 3.5s ease-in-out infinite alternate;
+}
+.jess-photo:active {
+  cursor: grabbing;
+  filter: brightness(1.05) contrast(1.15) saturate(1.2);
+  box-shadow: 0 8px 32px #0007;
+}
+
+@keyframes photo-bounce {
+  0% { transform: rotate(-2deg) scale(1.01); }
+  100% { transform: rotate(2deg) scale(1.03); }
+}
+
+.pin {
+  position: absolute;
+  top: -10px;
+  left: -8px;
+  transform: none;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 60% 40%, #1e0e27 0 7px, #0e0414 8px 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px #0005;
+  border: 2px solid #1e0e27;
+  z-index: 3;
+  animation: pin-bounce 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes pin-bounce {
+  0% { transform: translateX(-50%) scale(1.05); }
+  100% { transform: translateX(-50%) scale(0.95); }
+}
+
+/* Haku volando sobre el fondo */
+#haku-fly {
+  position: fixed;
+  right: -300px;
+  bottom: 80vh;
+  width: 220px;
+  z-index: -2;
+  pointer-events: none;
+  animation: haku-vuela-izq 18s linear infinite;
+  animation-delay: 3.5s;
+  filter: drop-shadow(0 6px 16px #000a);
+}
+
+@keyframes haku-vuela-izq {
+  0% {
+    right: -300px;
+    bottom: 80vh;
+    transform: rotateY(0deg) rotate(-3deg) scale(1.05);
+  }
+  10% {
+    right: 10vw;
+    bottom: 83vh;
+    transform: rotateY(0deg) rotate(-1deg) scale(1.07);
+  }
+  25% {
+    right: 30vw;
+    bottom: 87vh;
+    transform: rotateY(0deg) rotate(2deg) scale(1.1);
+  }
+  50% {
+    right: 60vw;
+    bottom: 85vh;
+    transform: rotateY(0deg) rotate(-2deg) scale(1.08);
+  }
+  75% {
+    right: 85vw;
+    bottom: 81vh;
+    transform: rotateY(0deg) rotate(3deg) scale(1.06);
+  }
+  100% {
+    right: 110vw;
+    bottom: 80vh;
+    transform: rotateY(0deg) rotate(-3deg) scale(1.05);
+  }
+}
+/* Kiki volando sobre el fondo */
+#kiki-fly {
+  position: fixed;
+  left: -200px;
+  bottom: 60vh;
+  width: 180px;
+  z-index: -2;
+  pointer-events: none;
+  animation: kiki-vuela 18s linear infinite;
+  filter: drop-shadow(0 4px 12px #0008);
+}
+
+@keyframes kiki-vuela {
+  0% {
+    left: -200px;
+    bottom: 60vh;
+    transform: rotateY(180deg) rotate(-5deg);
+  }
+  10% {
+    left: 10vw;
+    bottom: 63vh;
+    transform: rotateY(180deg) rotate(-2deg);
+  }
+  25% {
+    left: 30vw;
+    bottom: 67vh;
+    transform: rotateY(180deg) rotate(2deg);
+  }
+  50% {
+    left: 60vw;
+    bottom: 65vh;
+    transform: rotateY(180deg) rotate(-2deg);
+  }
+  75% {
+    left: 85vw;
+    bottom: 61vh;
+    transform: rotateY(180deg) rotate(3deg);
+  }
+  100% {
+    left: 110vw;
+    bottom: 60vh;
+    transform: rotateY(180deg) rotate(-5deg);
+  }
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #0a0a0a, #1b1b1b);
+  font-family: 'Courier New', Courier, monospace;
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#stars {
+  background: url('assets/img/tulipanes-ghibli-noche.png') repeat-x;
+  background-size: auto 100%;
+  background-position: 0 bottom;
+  position: fixed;
+  width: 200%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  animation: fondo-mueve 60s linear infinite;
+  z-index: -3;
+}
+
+@keyframes fondo-mueve {
+  0% { background-position: 0 bottom; }
+  100% { background-position: -100% bottom; }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+}
+
+.avatar {
+  max-width: 180px;
+  image-rendering: pixelated;
+  margin-bottom: 20px;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 30px;
+  margin-bottom: 40px;
+  padding-left: 60px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+
+.mensaje {
+  font-size: 1.1rem;
+  max-width: 600px;
+  white-space: pre-line;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.photo-frame {
+  position: relative;
+  width: 180px;
+  margin-left: 200px;
+  animation: swing 4s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+/* Estrella como soporte */
+.hanger-star {
+  font-size: 20px;
+  color: rgb(228, 224, 203);
+  text-align: center;
+  position: relative;
+  top: 0;
+}
+
+/* Línea que simula cuerda o hilo */
+.hanger-line {
+  width: 2px;
+  height: 40px;
+  background-color: #0e0414;
+  margin: 0 auto;
+}
+
+/* Marco de foto con fondo transparente */
+.frame {
+  border: 4px solid #0e0414;
+  border-radius: 10px;
+  padding: 6px;
+  background: transparent;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Imagen dentro del marco */
+.hearthands {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  border-radius: 6px;
+  background-color: transparent;
+}
+
+/* Columpio suave */
+@keyframes swing {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(1deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
